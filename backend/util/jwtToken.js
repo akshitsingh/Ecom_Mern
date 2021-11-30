@@ -1,0 +1,21 @@
+
+const COOKIE_EXPIRE = 5;
+
+
+//Creating token and saving in cookie
+const sendToken = (user, statusCode, res) => {
+  const token = user.getJwtToken();
+
+  //Options for cookies
+  const options = {
+    expires: new Date(Date.now + COOKIE_EXPIRE * 24 * 6 * 60 * 1000),
+    httpOnly: true,
+  };
+
+  res
+    .status(statusCode)
+    .cookie("token", token, options)
+    .json({ success: true, user, token });
+};
+
+module.exports = sendToken;
