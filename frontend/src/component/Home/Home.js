@@ -3,18 +3,29 @@ import { CgMouse } from "react-icons/all";
 import './Home.css';
 import Product from '../product/Product.js'
 import MetaData from '../layout/MetaData';
-
-const product = {
-    name : 'Blue tshir',
-    images : [{url :  'https://i.ibb.co/DRST11n/1.webp'}],
-    size : window.innerWidth < 600 ? 20 : 25,
-    price : "$3000",
-    _id : "abhishek"
-}
+import {useSelector,useDispatch} from 'react-redux'
+import { useEffect } from 'react';
+import { getProduct } from '../../actions/productAction';
+import Loader from '../loader/Loader';
+  
 
 const Home = () => {
-    return <Fragment>
-       <MetaData title="Ecommerce"></MetaData>
+
+  const dispatch = useDispatch();
+  const {loading,products} = useSelector(state=>state.products);
+
+  useEffect(()=>{
+      dispatch(getProduct());
+  },[dispatch])
+
+    
+
+    return (
+    
+    <Fragment>
+      {loading ? <Loader /> :
+         <div>
+          <MetaData title="Home page"></MetaData>
         <div className="banner">
             <p>Welcome to Ecommerce</p>
             <h1>FIND AMAZING PRODUCT BELOW</h1>
@@ -28,17 +39,18 @@ const Home = () => {
         <h1 className="homeHeading">Feature Products</h1>
 
         <div className="container">
-        <Product product={product} />
-        <Product product={product} />
-        <Product product={product} />
-        <Product product={product} />
-        <Product product={product} />
-        <Product product={product} />
-        <Product product={product} />
-        <Product product={product} />
+        {
+          products.map((prod)=> (
+            <Product product={prod} key={prod._id}/>
+          )
+          )
+        }
+        
         </div>
-
+         </div>
+         }         
         </Fragment>
+    )
 }
 
 export default Home

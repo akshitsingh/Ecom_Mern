@@ -11,6 +11,8 @@ const db =mongoose.connect(DB_URI,{
 const connectedDatabase = ()=>{
     db.then((data)=>{
         console.log(`mongodb connected with server: ${data.connection.host}`)
+    }).catch(err=>{
+        console.log("mongodb connection failed",err)
     }) 
 }
 

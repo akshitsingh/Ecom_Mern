@@ -5,7 +5,7 @@ import {BrowserRouter as Router,Route } from "react-router-dom";
 import { useEffect } from "react";
 import WebFont from "webfontloader";
 import Home from './component/Home/Home.js'
-
+ 
 
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
     <Router>
     <Header />
     <Route>
-     <Route path="/" component={Home} exact />
+    <Route path="/" component={Home} exact />
     </Route>
     <Footer />
     </Router>

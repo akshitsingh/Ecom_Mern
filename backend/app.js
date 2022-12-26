@@ -13,6 +13,9 @@ app.use(express.json())
 app.use(cookieParser());
 //Routes imports
 
+app.get('/',(req,res)=>{
+    res.send("hello world")
+})
 app.use('/api/v1',productRoute);
 app.use('/api/v1',user);
 app.use('/api/v1',order);
